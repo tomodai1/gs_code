@@ -8,7 +8,7 @@ $naiyou = $_POST["naiyou"];
 
 //2. DB接続します（定番　使いまわし）
 include("funcs.php");
-$pdo = db_conn();
+$pdo = db_con();
 
 
 //３．データ登録SQL作成

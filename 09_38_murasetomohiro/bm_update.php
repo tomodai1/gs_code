@@ -1,14 +1,17 @@
 <?php
 // 更新ファイル
+session_start();
+
+include "funcs.php";
+sessChk();
 
 //1.POSTでParamを取得（新規post時はID自動だったが、更新時は既存振り分けられたものを送信する必要あり）
-$name = $_POST["name"];
-$url = $_POST["url"];
-$naiyou = $_POST["naiyou"];
-$id = $_POST["id"];
+$name = filter_input( INPUT_POST, "name" );
+$url = filter_input( INPUT_POST, "url" );
+$naiyou = filter_input( INPUT_POST, "naiyou" );
+$id = filter_input( INPUT_POST, "id" );
 
 //2. DB接続します
-include "funcs.php";
 $pdo = db_con();
 
 //3.　データ更新SQL作成

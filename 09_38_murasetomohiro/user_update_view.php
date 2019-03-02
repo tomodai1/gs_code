@@ -1,13 +1,16 @@
 <?php
+session_start();
 
-// リンクからID取得
-$id = $_GET["id"];
+//※htdocsと同じ階層に「includes」を作成してfuncs.phpを入れましょう！
+include "funcs.php";
+sessChk();
+$id = filter_input( INPUT_GET, "id" );
 
 //--------------------------------------------------
 // 以下、select.phpをコピーしてきました。
 // -------------------------------------------------
 
-include "funcs.php";
+
 $pdo = db_con();
 
 //２．データ登録SQL作成

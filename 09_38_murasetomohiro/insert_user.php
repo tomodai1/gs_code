@@ -1,15 +1,19 @@
 <?php
 //1. POSTデータ取得
+session_start();
 
-$name = $_POST["name"];
-$lid = $_POST["lid"];
-$lpw = $_POST["lpw"];
-$kanri_flg = $_POST["kanri_flg"];
-$life_flg = $_POST["life_flg"];
+include("funcs.php");
+sessChk();
+
+$name = filter_input( INPUT_POST, "name" );
+$lid = filter_input( INPUT_POST, "lid" );
+$lpw = filter_input( INPUT_POST, "lpw" );
+$kanri_flg = filter_input( INPUT_POST, "kanri_flg" );
+$life_flg = password_hash($lpw, PASSWORD_DEFAULT);
 
 
 //2. DB接続します（定番　使いまわし）
-include("funcs.php");
+
 $pdo = db_con();
 
 

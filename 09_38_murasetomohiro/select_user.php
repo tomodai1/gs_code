@@ -1,11 +1,16 @@
 <?php
-//1.  DB接続します
+
+session_start();
+
+//1.外部ファイル読み込み＆DB接続
+//※htdocsと同じ階層に「includes」を作成してfuncs.phpを入れましょう！
 include("funcs.php");
+sessChk();
 $pdo = db_con();
 
 
 //２．データ登録SQL作成
-$stmt = $pdo->prepare("SELECT * FROM gs_bm_table");
+$stmt = $pdo->prepare("SELECT * FROM gs_user_table");
 $status = $stmt->execute();
 
 //３．データ表示
@@ -20,11 +25,11 @@ if($status==false) {
   //FETCH_ASSOC=http://php.net/manual/ja/pdostatement.fetch.php
   while($result = $stmt->fetch(PDO::FETCH_ASSOC)){ 
     $view .= '<p>';
-    $view .= '<a href="bm_update_view.php?id='.$result["id"].'">';
-    $view .= $result["indate"] . "," . $result["name"];
+    $view .= '<a href="user_update_view.php?id='.$result["id"].'">';
+    $view .= $result["name"] . "," . $result["lid"];
     $view .= '</a>';
     $view .= '　';//削除ボタンとのスペース用
-    $view .= '<a href="delete.php?id='.$result["id"].'">';
+    $view .= '<a href="delete_user.php?id='.$result["id"].'">';
     $view .= '[ 削除 ]';
     $view .= '</p>';
 
@@ -42,7 +47,7 @@ if($status==false) {
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>BookMark表示</title>
+<title>User一覧表示</title>
 <link rel="stylesheet" href="css/range.css">
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <style>div{padding: 10px;font-size:16px;}</style>
@@ -53,7 +58,7 @@ if($status==false) {
   <nav class="navbar navbar-default">
     <div class="container-fluid">
       <div class="navbar-header">
-      <a class="navbar-brand" href="index.php">登録画面へ</a>
+      <a class="navbar-brand" href="index_user.php">User登録画面へ</a>
       </div>
     </div>
   </nav>

@@ -1,9 +1,9 @@
 <?php
 //1. POSTデータ取得
 
-$name = $_POST["name"];
-$url = $_POST["url"];
-$naiyou = $_POST["naiyou"];
+$name   = filter_input( INPUT_POST, "name" );
+$url = filter_input( INPUT_POST, "url" );
+$naiyou = filter_input( INPUT_POST, "naiyou" );
 
 
 //2. DB接続します（定番　使いまわし）

@@ -1,9 +1,13 @@
 <?php
+session_start();
+
+include "funcs.php";
+sessChk();
+
 //削除該当ID
-$id = $_GET["id"];
+$id = filter_input( INPUT_GET, "id" );
 
 //DB接続
-include "funcs.php";
 $pdo = db_con();
 
 //DB削除SQL作成

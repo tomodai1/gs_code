@@ -1,39 +1,39 @@
 <?php
+session_start();
 
-// リンクからID取得
-$id = $_GET["id"];
+//表示する"id"を取得
+$id = filter_input( INPUT_GET, "id" );
 
-//--------------------------------------------------
-// 以下、select.phpをコピーしてきました。
-// -------------------------------------------------
-
+//外部ファイル読み込み
 include "funcs.php";
+
+//認証チェック
+sessChk();
+
+//DB接続
 $pdo = db_con();
 
-//２．データ登録SQL作成
-$stmt = $pdo->prepare("SELECT * FROM gs_bm_table WHERE id=:id");
-$stmt ->bindValue(":id",$id,PDO::PARAM_INT);
+//データ登録SQL作成
+$stmt = $pdo->prepare("SELECT * FROM gs_an_table WHERE id=:id");
+$stmt->bindValue(":id", $id, PDO::PARAM_INT);
 $status = $stmt->execute();
 
-//３．データ表示
+//データ表示
 $view = "";
 if ($status == false) {
     sqlError($stmt);
 } else {
-    //Selectデータの数だけ自動でループしてくれる
-    //FETCH_ASSOC=http://php.net/manual/ja/pdostatement.fetch.php
     $row = $stmt->fetch();
 }
-
-
 ?>
+
 
 
 <!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>更新画面</title>
+  <title>更新</title>
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <style>div{padding: 10px;font-size:16px;}</style>
 </head>
@@ -41,11 +41,8 @@ if ($status == false) {
 
 <!-- Head[Start] -->
 <header>
-  <nav class="navbar navbar-default">
-    <div class="container-fluid">
-    <div class="navbar-header"><a class="navbar-brand" href="select.php">データ一覧へ</a></div>
-    </div>
-  </nav>
+    <?php echo $_SESSION["name"]; ?>さん　
+    <?php include("menu.php"); ?>
 </header>
 <!-- Head[End] -->
 

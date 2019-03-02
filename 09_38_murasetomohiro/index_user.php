@@ -1,3 +1,11 @@
+<?php
+session_start();
+//※htdocsと同じ階層に「includes」を作成してfuncs.phpを入れましょう！
+include "funcs.php";
+sessChk();
+?>
+
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>

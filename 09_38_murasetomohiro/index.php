@@ -19,7 +19,7 @@
 <!-- Head[End] -->
 
 <!-- Main[Start] -->
-<form method="post" action="insert.php">
+<form method="post" action="insert.php" enctype="multipart/form-data">
   <div class="jumbotron">
    <fieldset>
     <legend>BookMark</legend>
